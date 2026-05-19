@@ -38,6 +38,9 @@ python watermark.py --image foto_wajah.jpg --qf 95 80 60 40 20
 
 ## Konsep
 
+Foto awal : 
+![deskripsi](fotosaya.jpeg)
+
 ```
 Foto Wajah
     │
@@ -74,6 +77,64 @@ Semua hasil disimpan di folder `output/`:
 - `metrics_plot.png` — Grafik PSNR, BER, NCC vs QF
 - `watermark_grid.png` — Grid perbandingan watermark per QF
 
+---
+
+## Contoh Output
+
+### 1. Foto Host & Watermark Asli
+
+Foto wajah yang digunakan sebagai host image (kiri) dan watermark biner teks "ITB" berukuran 64×64 piksel yang akan disisipkan (kanan).
+
+![Foto Host dan Watermark Asli](output/step1_host_and_watermark.png)
+
+---
+
+### 2. Perbandingan Foto Asli vs Foto Setelah Embed Watermark
+
+Foto asli (kiri), foto setelah watermark disisipkan menggunakan metode LSB (tengah), dan peta perbedaan piksel yang diperbesar (kanan). PSNR embed = **80.35 dB**, menunjukkan watermark tidak terlihat secara visual.
+
+![Embed Watermark](output/step2_embed_comparison.png)
+
+---
+
+### 3. Hasil Evaluasi per Quality Factor JPEG
+
+Tabel hasil evaluasi PSNR, BER, dan NCC untuk setiap nilai QF yang diuji:
+
+| QF | PSNR (dB) | BER | NCC | Status |
+|----|-----------|-----|-----|--------|
+| 90 | 48.21 | 0.5254 | -0.0099 | ✗ Tidak dapat diekstrak |
+| 80 | 45.61 | 0.5310 |  0.0079 | ✗ Tidak dapat diekstrak |
+| 70 | 44.00 | 0.5415 |  0.0132 | ✗ Tidak dapat diekstrak |
+| 60 | 38.52 | 0.5227 |  0.0334 | ✗ Tidak dapat diekstrak |
+| 50 | 35.08 | 0.6328 | -0.0428 | ✗ Tidak dapat diekstrak |
+| 40 | 34.68 | 0.3635 |  0.0387 | ✗ Tidak dapat diekstrak |
+| 30 | 33.68 | 0.5925 |  0.0002 | ✗ Tidak dapat diekstrak |
+| 20 | 31.75 | 0.5149 |  0.0112 | ✗ Tidak dapat diekstrak |
+| 10 | 28.53 | 0.9187 | -0.0268 | ✗ Tidak dapat diekstrak |
+
+> 🔴 **Watermark TIDAK dapat diekstrak pada QF ≤ 90**
+
+---
+
+### 4. Grafik Metrik Evaluasi (PSNR / BER / NCC vs QF)
+
+Grafik berikut menunjukkan tren ketiga metrik seiring menurunnya Quality Factor. Garis putus-putus menunjukkan threshold keberhasilan ekstraksi watermark.
+
+![Grafik Metrik](output/metrics_plot.png)
+
+---
+
+### 5. Grid Watermark Ter-Ekstrak per QF
+
+Perbandingan watermark asli (kiri atas) dengan watermark hasil ekstraksi dari setiap versi foto yang dikompres JPEG pada berbagai QF. Seluruh hasil menunjukkan pola noise yang mengkonfirmasi kegagalan ekstraksi.
+
+![Grid Watermark](output/watermark_grid.png)
+
+---
+
 ## Catatan Teknis
 
 LSB (Least Significant Bit) sangat rentan terhadap kompresi JPEG karena JPEG adalah kompresi **lossy** — bit-bit LSB pada setiap pixel bisa berubah setelah kompresi. Semakin rendah QF, semakin besar distorsi, semakin rusak watermark yang diekstrak.
+
+Untuk aplikasi yang membutuhkan ketahanan watermark terhadap JPEG, disarankan menggunakan metode berbasis domain frekuensi seperti **DCT watermarking** atau **DWT+SVD watermarking**.

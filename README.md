@@ -38,9 +38,6 @@ python watermark.py --image foto_wajah.jpg --qf 95 80 60 40 20
 
 ## Konsep
 
-Foto awal : 
-![deskripsi](fotosaya.jpeg)
-
 ```
 Foto Wajah
     │
@@ -85,7 +82,7 @@ Semua hasil disimpan di folder `output/`:
 
 Foto wajah yang digunakan sebagai host image (kiri) dan watermark biner teks "ITB" berukuran 64×64 piksel yang akan disisipkan (kanan).
 
-![Foto Host dan Watermark Asli](output/step1_host_and_watermark.png)
+![Foto Host dan Watermark Asli](output/1.png)
 
 ---
 
@@ -93,7 +90,7 @@ Foto wajah yang digunakan sebagai host image (kiri) dan watermark biner teks "IT
 
 Foto asli (kiri), foto setelah watermark disisipkan menggunakan metode LSB (tengah), dan peta perbedaan piksel yang diperbesar (kanan). PSNR embed = **80.35 dB**, menunjukkan watermark tidak terlihat secara visual.
 
-![Embed Watermark](output/step2_embed_comparison.png)
+![Embed Watermark](output/2.png)
 
 ---
 
@@ -121,7 +118,7 @@ Tabel hasil evaluasi PSNR, BER, dan NCC untuk setiap nilai QF yang diuji:
 
 Grafik berikut menunjukkan tren ketiga metrik seiring menurunnya Quality Factor. Garis putus-putus menunjukkan threshold keberhasilan ekstraksi watermark.
 
-![Grafik Metrik](output/metrics_plot.png)
+![Grafik Metrik](output/3.png)
 
 ---
 
@@ -129,7 +126,7 @@ Grafik berikut menunjukkan tren ketiga metrik seiring menurunnya Quality Factor.
 
 Perbandingan watermark asli (kiri atas) dengan watermark hasil ekstraksi dari setiap versi foto yang dikompres JPEG pada berbagai QF. Seluruh hasil menunjukkan pola noise yang mengkonfirmasi kegagalan ekstraksi.
 
-![Grid Watermark](output/watermark_grid.png)
+![Grid Watermark](output/4.png)
 
 ---
 
